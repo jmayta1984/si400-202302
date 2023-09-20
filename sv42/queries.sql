@@ -72,7 +72,75 @@ go
 select codigo, nombre from temas
 go
 
+
+    
+insert into locales (codigo, nombre, capacidad, direccion)
+    values (1, 'Club Árabe', 100, 'Av. Primavera 2550')
+go
+
+insert into locales (codigo, nombre, capacidad, direccion)
+    values (2, 'Club La Fontana', 100, 'Av. La Fontana 2660')
+go
+
+insert into locales (codigo, nombre, capacidad, direccion)
+    values (3, 'Club Tacna', 50, 'Av. Tacna 2550')
+go
+
+select * from locales
+where capacidad > 50
+go
+
+create table oradores (
+    codigo int not null identity (1, 1),
+    nombre varchar(100) not null,
+    apellido_paterno varchar(100) not null,
+    apellido_materno varchar(100) not null,
+    especialidad varchar(100) not null,
+    constraint pk_oradores primary key (codigo)
+)
+go
+
+insert into oradores (nombre, apellido_paterno, apellido_materno, especialidad)
+    values ('David', 'Fuentes', 'Castillo', 'Aplicaciones móviles'),
+           ('Ricardo', 'Arias', 'Portilla', 'Aplicaciones móviles')
+go
+
+select * from oradores
+go
+
+update oradores
+set nombre = 'Roberto'
+where codigo = 2
+go
+
+select nombre from oradores
+go
 -- update
 update temas set nombre = 'ChatGTP en la educación'
 where codigo = 1
 go
+
+
+-- funciones de agregación
+-- count: cuenta resultados
+
+select count(*) as CustomerQuantity from Customers
+where Country = 'Germany'
+go
+
+select CompanyName, Country from Customers
+where Country = 'Germany' or Country = 'Mexico'
+order by CompanyName
+go
+
+--1: Indicar los países de procedencia de los clientes
+select distinct Country from Customers
+order by Country
+go
+
+--2: Indicar los nombres de los clientes que son de Mexico, Germany o USA
+
+select distinct CompanyName, Country
+from Customers
+where Country in ('Mexico', 'Germany', 'USA')
+
